@@ -7,7 +7,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, index=True, unique=True)
     email = Column(String, unique=True)
-    password = Column(String)
+    password_hash = Column(String)
 
 
 """

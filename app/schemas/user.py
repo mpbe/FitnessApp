@@ -13,8 +13,8 @@ class UserLogin(BaseModel):
 
 
 class UserOut(BaseModel):
+    id: int
     username: str
-    password: str
     email: EmailStr
 
     class Config:

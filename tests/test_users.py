@@ -14,6 +14,11 @@ def test_create_user_success(client):
 
 
 def test_login_user_success(client):
+    client.post("/users/", json={
+        "username": "test",
+        "email": "test@test.com",
+        "password": "test"
+    })
 
     response = client.post("/users/login", data={
         "username": "test",

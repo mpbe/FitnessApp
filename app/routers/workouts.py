@@ -69,7 +69,7 @@ def delete_workout(workout_id: int,
     if not workout_to_delete:
         raise HTTPException(404, "workout does not exist")
 
-    if not workout_to_delete.id == current_user.id:
+    if not workout_to_delete.user_id == current_user.id:
         raise HTTPException(403, detail="unauthorised")
 
     db.delete(workout_to_delete)

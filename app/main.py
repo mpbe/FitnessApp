@@ -1,17 +1,28 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from app.database import engine, Base
 from app.routers import users, workouts
 from fastapi.middleware.cors import CORSMiddleware
+from app.config import config
 
 app = FastAPI()
 
-#create the database tables
-Base.metadata.create_all(bind=engine)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # create database tables
+    Base.metadata.create_all(bind=engine)
+
+origins = [
+    config.FRONTEND_URL
+
+]
 
 #add CORS middleware to help integration with frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for development
+    allow_origins=origins,  # for development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

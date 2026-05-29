@@ -13,10 +13,10 @@ app = FastAPI()
 async def lifespan(app: FastAPI):
     # create database tables
     Base.metadata.create_all(bind=engine)
+    yield
 
 origins = [
     config.FRONTEND_URL
-
 ]
 
 #add CORS middleware to help integration with frontend
